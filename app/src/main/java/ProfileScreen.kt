@@ -1,5 +1,6 @@
 package com.example.schooldiary.ui.profile
 
+import android.content.Intent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -28,7 +29,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.schooldiary.DnevnikActivity
 import com.example.schooldiary.domain.AppSettings
 import com.example.schooldiary.domain.AppTheme
 import com.example.schooldiary.domain.StudentProfile
@@ -45,6 +48,7 @@ fun ProfileScreen(
     onLogout: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -121,6 +125,16 @@ fun ProfileScreen(
                 Spacer(Modifier.width(12.dp))
                 Switch(checked = settings.biometricEnabled, onCheckedChange = onBiometricToggle)
             }
+        }
+
+        // Дневник.ру
+        Text("Дневник.ру", style = MaterialTheme.typography.titleLarge)
+        OutlinedButton(
+            onClick = { context.startActivity(Intent(context, DnevnikActivity::class.java)) },
+            modifier = Modifier.fillMaxWidth().height(52.dp),
+            shape = RoundedCornerShape(16.dp)
+        ) {
+            Text("Подключить Дневник.ру")
         }
 
         Spacer(Modifier.height(4.dp))
