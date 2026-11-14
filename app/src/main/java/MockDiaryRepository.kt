@@ -25,9 +25,9 @@ class MockDiaryRepository : DiaryRepository {
         "13:25" to "14:10"
     )
 
-    private val week: Map<Int, List<Lesson>> by lazy { buildWeek() }
+    private val weekData: Map<Int, List<Lesson>> by lazy { buildWeek() }
 
-    private val subjects: List<SubjectGrades> = listOf(
+    private val subjectsData: List<SubjectGrades> = listOf(
         SubjectGrades(1, "Алгебра", "Иванова Е. П.", listOf(5, 4, 5, 5, 4, 5, 5, 4)),
         SubjectGrades(2, "Геометрия", "Иванова Е. П.", listOf(4, 4, 5, 4, 5, 4)),
         SubjectGrades(3, "Русский язык", "Петрова О. А.", listOf(5, 5, 4, 5, 4, 5)),
@@ -90,12 +90,12 @@ class MockDiaryRepository : DiaryRepository {
 
     override fun getProfile(): StudentProfile = profile
 
-    override fun getWeek(): Map<Int, List<Lesson>> = week
+    override fun getWeek(): Map<Int, List<Lesson>> = weekData
 
-    override fun getSubjects(): List<SubjectGrades> = subjects
+    override fun getSubjects(): List<SubjectGrades> = subjectsData
 
     override fun getRating(): ClassRating {
-        val me = GradeCalculator.overallAverage(subjects)
+        val me = GradeCalculator.overallAverage(subjectsData)
         return ClassRating(
             place = 4,
             total = 25,
